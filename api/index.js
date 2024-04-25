@@ -1,4 +1,10 @@
 import express from 'express';
+import mongoose from 'mongoose';
+
+mongoose
+  .connect("mongodb://localhost/luxeOasis")
+  .then(() => console.log("connected to database"))
+  .catch((err) => console.log(`Error ${err}`));
 
 const app = express();
 
