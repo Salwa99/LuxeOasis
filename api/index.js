@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import userRouter from './routes/user.route.js'
 
 mongoose
   .connect("mongodb://localhost/luxeOasis")
@@ -12,4 +13,6 @@ const PORT = 3001;
 
 app.listen(PORT, () => {
     console.log(`Server is running in port ${PORT}`)
-})
+});
+
+app.use('/api/user', userRouter);
