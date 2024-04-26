@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SignIn() {
+  // State variables
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  // Hook for navigation
   const navigate = useNavigate();
 
+  // handle form input change
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -15,10 +18,12 @@ export default function SignIn() {
     });
   };
 
+  // handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
+      // Send a POST request to the server with form data
       const res = await fetch("/api/auth/signin", {
         method: "POST",
         headers: {
@@ -26,7 +31,9 @@ export default function SignIn() {
         },
         body: JSON.stringify(formData),
       });
+      // Parse the response
       const data = await res.json();
+      // Handle response data
       if (data.success === false) {
         setLoading(false);
         setError(data.message);
